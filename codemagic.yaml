@@ -11,9 +11,7 @@ workflows:
       cocoapods: default
     scripts:
       - |
-        cd example
         # set up debug keystore
-        rm -f ~/.android/debug.keystore
         keytool -genkeypair \
           -alias androiddebugkey \
           -keypass android \
@@ -26,13 +24,13 @@ workflows:
       - |
         # set up local properties
         echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
+      - cd example
       - flutter packages pub get
       - flutter build apk --debug
     artifacts:
-      - build/**/outputs/**/*.apk
-      - build/**/outputs/**/*.aab
-      - build/**/outputs/**/mapping.txt
-      - flutter_drive.log
+      - example/build/**/outputs/**/*.apk
+      - example/build/**/outputs/**/*.aab
+      - example/build/**/outputs/**/mapping.txt
     publishing:
       email:
         recipients:
