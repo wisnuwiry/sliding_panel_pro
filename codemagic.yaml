@@ -12,6 +12,7 @@ workflows:
     scripts:
       - |
         # set up debug keystore
+        rm -f ~/.android/debug.keystore
         keytool -genkeypair \
           -alias androiddebugkey \
           -keypass android \
